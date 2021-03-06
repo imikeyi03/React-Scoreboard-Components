@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Player from './Player';
+import AddPlayerForm from './AddPlayerForm';
 
   
 
@@ -38,27 +39,25 @@ class App extends React.Component {
     console.log('index: ' + index, 'delta: ' + delta);
   }
 
-  
-  // Below is a way to update the score change without directly mutating the the original state
-  
-  // handleScoreChange = (index, delta) => {
-  //   this.setState( prevState => {
-  //     // New 'players' array – a copy of the previous `players` state
-  //     const updatedPlayers = [ ...prevState.players ];
-  //     // A copy of the player object we're targeting
-  //     const updatedPlayer = { ...updatedPlayers[index] };
+  //player id counter
+  prevPlayerId = 4;
 
-  //     // Update the target player's score
-  //     updatedPlayer.score += delta;
-  //     // Update the 'players' array with the target player's latest score
-  //     updatedPlayers[index] = updatedPlayer;
 
-  //     // Update the `players` state without mutating the original state
-  //     return {
-  //       players: updatedPlayers
-  //     };
-  //   });
-  // }
+  handleAddPlayer = (name) => {
+    this.setState( prevState => { 
+      return {
+        players: [
+          ...prevState.players,
+          {
+            name, // ES6 shortcut with the same key value name can be written as just name
+            score: 0,
+            id: this.prevPlayerId += 1 
+          }
+        ]
+      };
+    });
+  }
+
 
 
   handleRemovePlayer = (id) => {
@@ -74,7 +73,7 @@ class App extends React.Component {
       <div className="scoreboard">
         <Header 
           title="Scoreboard" 
-          totalPlayers={this.state.players.length} 
+          players={this.state.players} 
         />
   
         {/* Players list */}
@@ -89,6 +88,8 @@ class App extends React.Component {
             removePlayer={this.handleRemovePlayer}           
           />
         )}
+
+        <AddPlayerForm addPlayer={this.handleAddPlayer}/>
       </div>
     );
   }
