@@ -1,30 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types'
 
-class AddPlayerForm extends Component {
+const AddPlayerForm = ({ addPlayer }) => {
 
-    state = {
-        value: ''
-    };
-
-    handleValueChange = (e) => {
-        this.setState({ value: e.target.value });
-    }
-
-    handleSubmit = (e) => {
+    let playerInput = React.createRef();
+    let handleSubmit = (e) => {
         e.preventDefault();
-        this.props.addPlayer(this.state.value);
-        this.setState({value: '' });
+        addPlayer(playerInput.current.value);
+        e.currentTarget.reset();
     }
-    
-
-    render() {
-        console.log(this.state.value);
-        return(
-            <form onSubmit={this.handleSubmit}>
+        
+    return (
+            <form onSubmit={handleSubmit}>
                 <input 
                     type="text"
-                    value={this.state.value}
-                    onChange={this.handleValueChange}
+                    ref={playerInput}
                     placeholder="Enter a player's name"
                 />
                 <input 
@@ -33,12 +23,13 @@ class AddPlayerForm extends Component {
                 />
             </form>
         );
-    }
+    
 }
 
-
-
-
+AddPlayerForm.propTypes = {
+    addPlayer: PropTypes.func,
+    handleSubmit: PropTypes.func
+};
 
 
 export default AddPlayerForm;
