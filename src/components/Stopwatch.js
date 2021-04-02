@@ -6,7 +6,11 @@ class Stopwatch extends Component {
         isRunning: false
     };
     
-    
+    componentDidMount() {
+        console.log("Weee!")
+    }
+
+
     tick = () => {
         this.componentDidMount()
     };

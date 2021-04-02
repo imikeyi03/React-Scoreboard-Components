@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Icon from './Icon'
 import Counter from './Counter';
 
 const Player = (props) => {
@@ -7,6 +7,7 @@ const Player = (props) => {
       <div className="player">
         <span className="player-name">
           <button className="remove-player" onClick={() => props.removePlayer(props.id)}>✖</button>
+          <Icon isHighScore = {this.props.isHighScore} />
           { props.name }
         </span>
   
