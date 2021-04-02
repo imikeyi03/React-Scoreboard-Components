@@ -20,7 +20,7 @@ const Header = ({ players, title }) => {
   }
 
   Header.defaultProps = {
-    title: 'Scoreboard'
+    title: 'Catan Scoreboard'
   };
 
   export default Header;
