@@ -32,8 +32,8 @@ class App extends React.Component {
   };
 
   getHighScore = () => {
-    const scores = this.state.players.map( p => p.score )
-    const getHighScore = Math.max(...scores);
+    const scores = this.state.players.map( p => p.score );
+    const highScore = Math.max(...scores);
     if (highScore) {
       return highScore;
     }
