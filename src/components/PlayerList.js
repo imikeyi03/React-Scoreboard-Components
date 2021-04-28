@@ -2,24 +2,23 @@ import React from 'react';
 import { Consumer } from './Context';
 import Player from './Player';
 
-const PlayerList = ({players, getHighScore, changeScore, removePlayer}) => {
+const PlayerList = () => {
   return (
     <Consumer>
       { context => (
-           <div>
-            {context.map((player, index) =>
+           <React.Fragment>
+            {context.players.map((player, index) =>
               <Player
+                {...player}
                 index={index}
                 key={player.id.toString()}
                 id={player.id}
                 name={player.name}
                 score={player.score}
-                changeScore={changeScore}
-                removePlayer={removePlayer}
-                isHighScore={getHighScore() === player.score}
+                isHighScore={context.actions.getHighScore() === player.score}
               />
             )}
-         </div>
+         </React.Fragment>
       )}
     </Consumer>
  
